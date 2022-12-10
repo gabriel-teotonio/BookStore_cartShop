@@ -1,0 +1,19 @@
+
+
+.cart-item{
+    display: flex;
+    gap: 1rem;
+    padding: 0 .6rem;
+}
+.cart-item .cart-item_img{
+    max-width: 100px;
+}
+.cart-item_infos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.cart-item_infosBotton{
+    display: flex;
+    justify-content: space-between;
+}
