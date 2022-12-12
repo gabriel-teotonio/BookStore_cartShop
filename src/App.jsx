@@ -3,10 +3,17 @@ import { AsideCart } from './Components/AsideCart'
 import { Product } from './Components/Product'
 import { products } from './Data/products'
 import './App.css'
+import { useMemo } from 'react'
+import { CartItem } from './Components/CartItem'
 
 function App() {
   const [modalAside, setModalAside] = useState("")
   const [cartItems, setCartItems] = useState([])
+  const [cartTotal,setCartTotal] = useState("")
+
+  useMemo(()=> {
+    calculateCartTotal(cartItems)
+  },[cartItems])
 
   function closeModal () {
      setModalAside("")
@@ -35,8 +42,15 @@ function App() {
       setCartItems(copyCartItem.filter(item => item.id !== book.id ))
     }
     else{
-        setCartItems(cartItems.map(item => item.id === book.id ? {...item, qtd: item.qtd - 1}: item))     
+        setCartItems(cartItems.map(item => item.id === book.id ? {...item, qtd: item.qtd - 1}: item))
       }
+  }
+
+  function calculateCartTotal (items) {
+    const allCartPrices = items.map(item => item.price * item.qtd)
+    const totalCartPrice = allCartPrices.reduce((acc,value) => acc += value, 0)
+
+    setCartTotal(totalCartPrice.toFixed(2))
   }
 
   return (
@@ -47,6 +61,7 @@ function App() {
     cartItems={cartItems}
     addToCart={handleAddToCart}
     removeFromCart={handleRemoveFromCart}
+    cartTotal={cartTotal}
     />
       <header>
         <h1>BookStore</h1>

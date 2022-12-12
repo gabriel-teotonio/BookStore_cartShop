@@ -1,7 +1,7 @@
 import { CartItem } from '../CartItem'
 import "../AsideCart/style.css"
 
-export const AsideCart = ({closeModal,modalAside,cartItems,addToCart,removeFromCart}) => {
+export const AsideCart = ({closeModal,modalAside,cartItems,addToCart,removeFromCart,cartTotal}) => {
   return (
     <aside className={`aside-cart ${modalAside}`}>
         <div className='header-aside'>
@@ -28,9 +28,11 @@ export const AsideCart = ({closeModal,modalAside,cartItems,addToCart,removeFromC
             </ul>
             <div className='infos-buy'>
               <div className='infos-price'>
-                <span>Total: R$260,00</span>
+                <span>Total: R$ ${cartTotal}</span>
               </div>
-              <button className='btnAside-buy'>Finalizar compra</button>
+              <button
+               className='btnAside-buy'
+               >Finalizar compra</button>
             </div>
         </div>
         </aside>
